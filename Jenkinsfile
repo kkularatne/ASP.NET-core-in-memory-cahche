@@ -1,10 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('Checkout') {
+    stage('Restore PACKAGES') {
       steps {
-        git(url: 'https://github.com/kkularatne/ASP.NET-core-in-memory-cahche.git', branch: 'master', credentialsId: 'userid')
-      }
+        bat "dotnet restore --configfile NuGet.Config"
+       }
     }
   }
 }
