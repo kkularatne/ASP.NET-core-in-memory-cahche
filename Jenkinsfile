@@ -18,7 +18,7 @@ pipeline {
     }
    stage('Sonarqube') {
     environment {
-        scannerHome = tool 'MySonarQubeScanner'
+        scannerHome = tool 'dotnetcorescanner'
     }
     steps {
         withSonarQubeEnv('sonarqube') {
