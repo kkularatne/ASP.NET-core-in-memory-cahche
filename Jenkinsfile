@@ -7,14 +7,27 @@ pipeline {
        }
     }
     stage('Clean') {
-   steps {
-    bat 'dotnet clean'
-   }
-  }
+      steps {
+        bat 'dotnet clean'
+      }
+    }
   stage('Build') {
-   steps {
-    bat 'dotnet build'
-   }
-  }
+     steps {
+      bat 'dotnet build'
+      }
+    }
+   stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'MySonarQubeScanner'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
   }
 }
