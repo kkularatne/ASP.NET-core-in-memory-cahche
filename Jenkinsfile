@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Sonar') {
       steps {
-        withSonarQubeEnv(installationName: 'dotnetcorescanner', credentialsId: 'd79705dd-b88b-474b-8cd6-9ed11270dd63')
+        withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'd79705dd-b88b-474b-8cd6-9ed11270dd63')
       }
     }
   }
